@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Pibane Mídia — Escalas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0f1e;--bg2:#111827;--bg3:#1a2235;
+  --card:#161e2e;--card2:#1e2a3e;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
+  --text:#f0f4ff;--text2:#94a3b8;--text3:#64748b;
+  --green:#22d37a;--green-l:rgba(34,211,122,.12);--green-d:#052e16;
+  --amber:#fbbf24;--amber-l:rgba(251,191,36,.1);
+  --red:#f87171;--red-l:rgba(248,113,113,.1);
+  --blue:#60a5fa;--blue-l:rgba(96,165,250,.1);
+  --accent:#3b82f6;--r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* ── LOGIN ── */
+#tela-login{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
+.login-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 40% at 80% 10%,rgba(59,130,246,.12) 0%,transparent 60%),radial-gradient(ellipse 40% 50% at 10% 80%,rgba(34,211,122,.07) 0%,transparent 60%)}
+.login-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
+.login-box{width:100%;max-width:360px;position:relative;z-index:1}
+.login-brand{text-align:center;margin-bottom:32px}
+.login-logo{width:60px;height:60px;margin:0 auto 14px;background:linear-gradient(135deg,#1d4ed8,#2563eb);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 32px rgba(37,99,235,.4);animation:pl 3s ease-in-out infinite}
+@keyframes pl{0%,100%{box-shadow:0 8px 32px rgba(37,99,235,.4)}50%{box-shadow:0 8px 48px rgba(37,99,235,.6)}}
+.login-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.login-sub{color:var(--text3);font-size:13px}
+.login-loading{text-align:center;padding:20px 0;color:var(--text3);font-size:13px;display:none}
+.login-section{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:10px}
+.vol-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.vbtn{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 10px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;transition:all .2s}
+.vbtn:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.vbtn.admin{grid-column:1/-1;background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(37,99,235,.08));border-color:rgba(59,130,246,.3);flex-direction:row;justify-content:center;gap:10px}
+.av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;background:linear-gradient(135deg,#1d4ed8,#0d9488)}
+.av.adm{background:linear-gradient(135deg,#7c3aed,#2563eb)}
+.av-md{width:40px;height:40px;font-size:13px}
+.av-sm{width:30px;height:30px;font-size:10px}
+.vol-login-name{font-size:12px}
+.vol-login-fn{font-size:10px;color:var(--text3)}
+
+/* ── APP ── */
+#tela-app{display:none;max-width:430px;margin:0 auto;min-height:100vh}
+.app-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 16px 0;position:sticky;top:0;z-index:20}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.brand{font-family:'Syne',sans-serif;font-size:16px;font-weight:700}
+.brand span{color:var(--blue)}
+.hbtns{display:flex;gap:6px}
+.ibtn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 10px;color:var(--text2);font-size:11px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:4px}
+.ibtn:hover{border-color:var(--border2);color:var(--text)}
+.user-bar{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;margin-bottom:12px}
+.user-info{flex:1}
+.uname{font-size:14px;font-weight:600}
+.ufn{font-size:11px;color:var(--text3);margin-top:1px}
+.pill{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.pg{background:var(--green-l);color:var(--green);border:1px solid rgba(34,211,122,.2)}
+.pb{background:var(--blue-l);color:var(--blue);border:1px solid rgba(96,165,250,.2)}
+.pa{background:var(--amber-l);color:var(--amber);border:1px solid rgba(251,191,36,.2)}
+.pr{background:var(--red-l);color:var(--red);border:1px solid rgba(248,113,113,.2)}
+.pgr{background:rgba(255,255,255,.05);color:var(--text3);border:1px solid var(--border)}
+
+.tabs{display:flex;gap:2px;padding:0 4px;overflow-x:auto}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:8px 13px;border-radius:8px 8px 0 0;border:none;background:transparent;color:var(--text3);font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s;position:relative}
+.tab.active{color:var(--text);background:var(--bg)}
+.tab.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);border-radius:1px}
+
+/* ── PANES ── */
+.pane{display:none;padding:14px}
+.pane.active{display:block}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.card-blue{border-left:2px solid var(--accent)}
+.card-green{border-left:2px solid var(--green)}
+.card-amber{border-left:2px solid var(--amber)}
+.sec-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:8px}
+.sec-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:12px}
+.muted{color:var(--text2);font-size:13px;line-height:1.6}
+
+/* ── DATAS DISPONIBILIDADE ── */
+.ditem{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px 13px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
+.ditem.dsim{background:rgba(34,211,122,.06);border-color:rgba(34,211,122,.25)}
+.ditem.dnao{background:rgba(248,113,113,.06);border-color:rgba(248,113,113,.25)}
+.dlabel{font-size:13px;font-weight:600}
+.dsub{font-size:11px;color:var(--text3);margin-top:2px}
+.dbtns{display:flex;gap:6px}
+.dbtn{padding:6px 13px;border-radius:8px;border:1px solid;font-size:12px;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
+.ds{background:var(--green-l);border-color:rgba(34,211,122,.3);color:var(--green)}
+.ds.on{background:var(--green);border-color:var(--green);color:#fff}
+.dn{background:var(--red-l);border-color:rgba(248,113,113,.3);color:var(--red)}
+.dn.on{background:var(--red);border-color:var(--red);color:#fff}
+
+/* ── ESCALAS ── */
+.escala-card{background:var(--card2);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:10px}
+.escala-head{padding:12px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid var(--border)}
+.escala-dt{font-size:13px;font-weight:600}
+.escala-fn{font-size:11px;color:var(--text3);margin-top:2px}
+.escala-body{padding:10px 12px;display:flex;gap:8px}
+.btn-cf{flex:1;padding:10px;border:none;border-radius:9px;background:var(--green);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .2s;box-shadow:0 4px 12px rgba(34,211,122,.2)}
+.btn-cf:hover{transform:translateY(-1px)}
+.btn-cf:disabled{background:var(--card2);color:var(--text3);box-shadow:none;transform:none;cursor:default;border:1px solid var(--border)}
+.btn-tr{padding:10px 13px;border-radius:9px;border:1px solid var(--border);background:var(--amber-l);color:var(--amber);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-tr:hover{border-color:var(--amber)}
+
+/* ── ADMIN ── */
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.metric{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center}
+.met-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;line-height:1;margin-bottom:3px}
+.met-l{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+
+.vrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.vrow:last-child{border-bottom:none}
+.vinfo{flex:1}
+.vname{font-size:13px;font-weight:600}
+.vfn{font-size:11px;color:var(--text3);margin-top:1px}
+.fbar-wrap{display:flex;align-items:center;gap:6px}
+.fbar{width:56px;height:4px;background:var(--border2);border-radius:2px;overflow:hidden}
+.ffill{height:100%;border-radius:2px;transition:width .8s ease}
+.fval{font-size:11px;color:var(--text3);min-width:28px;text-align:right}
+
+.slot-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;margin-bottom:6px;background:var(--card2);border:1px solid var(--border)}
+.sl-cf{border-left:3px solid var(--green)}
+.sl-pd{border-left:3px solid var(--amber)}
+.sl-vz{border-left:3px solid var(--red)}
+
+.disp-table{width:100%;border-collapse:collapse;font-size:12px}
+.disp-table th{background:var(--card2);color:var(--text3);padding:8px 10px;text-align:left;font-weight:600;border-bottom:1px solid var(--border)}
+.disp-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)}
+.disp-table tr:last-child td{border-bottom:none}
+.disp-sim{color:var(--green);font-weight:600}
+.disp-nao{color:var(--red)}
+.disp-null{color:var(--text3)}
+
+/* ── WHATSAPP MODAL ── */
+.wa-msg{background:#1a2f1a;border:1px solid rgba(34,211,122,.2);border-radius:10px;padding:13px;margin-bottom:10px;position:relative}
+.wa-nome{font-size:11px;color:var(--green);font-weight:600;margin-bottom:5px}
+.wa-tel{font-size:10px;color:var(--text3);margin-bottom:8px}
+.wa-text{font-size:12px;color:#d1fae5;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.wa-copy{position:absolute;top:10px;right:10px;background:rgba(34,211,122,.15);border:1px solid rgba(34,211,122,.3);border-radius:6px;padding:4px 10px;color:var(--green);font-size:11px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
+.wa-copy:hover{background:rgba(34,211,122,.25)}
+
+/* ── MODAL ── */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
+.modal-bg.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:20px 20px 0 0;padding:20px 18px 32px;width:100%;max-width:430px;animation:su .3s cubic-bezier(.34,1.2,.64,1);max-height:90vh;overflow-y:auto}
+@keyframes su{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{width:32px;height:3px;background:var(--border2);border-radius:2px;margin:0 auto 18px}
+.modal-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.modal-sub{color:var(--text3);font-size:13px;margin-bottom:16px;line-height:1.5}
+.sub-item{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 12px;margin-bottom:8px;cursor:pointer;transition:all .2s}
+.sub-item:hover{border-color:var(--border2)}
+.sub-item.sel{border-color:var(--green);background:rgba(34,211,122,.06)}
+.sub-nome{font-size:13px;font-weight:600}
+.sub-mot{font-size:11px;color:var(--text3);margin-top:1px}
+.sub-sc{margin-left:auto;font-size:13px;font-weight:700;color:var(--green)}
+
+/* ── BTNS ── */
+.btn-primary{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--r);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;margin-top:12px;box-shadow:0 4px 16px rgba(59,130,246,.25)}
+.btn-primary:hover{background:#2563eb;transform:translateY(-1px)}
+.btn-primary:disabled{background:var(--card2);color:var(--text3);box-shadow:none;transform:none;cursor:default;border:1px solid var(--border)}
+.btn-secondary{width:100%;padding:11px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:var(--r);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;cursor:pointer;margin-top:8px;transition:all .2s}
+.btn-secondary:hover{border-color:var(--border2);color:var(--text)}
+
+/* ── CONFIG ── */
+.cfg-input{width:100%;padding:10px 12px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;outline:none;margin-top:6px}
+.cfg-input:focus{border-color:var(--accent)}
+.cfg-label{font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.alert-warn{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:var(--r);padding:13px;margin-bottom:12px;font-size:13px;color:var(--amber);line-height:1.6}
+.alert-warn strong{display:block;font-weight:600;margin-bottom:4px}
+code{background:rgba(0,0,0,.3);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:11px;color:var(--text2)}
+
+/* ── TOAST / LOADER ── */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);padding:11px 22px;border-radius:24px;font-size:13px;font-weight:500;z-index:999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none;backdrop-filter:blur(8px)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+#toast.ok{background:rgba(34,211,122,.9);color:#fff}
+#toast.err{background:rgba(248,113,113,.9);color:#fff}
+#toast.inf{background:rgba(96,165,250,.9);color:#fff}
+.loader-bg{display:none;position:fixed;inset:0;background:rgba(10,15,30,.85);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:14px;backdrop-filter:blur(4px)}
+.loader-bg.open{display:flex}
+.spin{border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-txt{color:var(--text2);font-size:13px}
+.sep{height:1px;background:var(--border);margin:14px 0}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div id="tela-login">
+  <div class="login-bg"></div>
+  <div class="login-grid"></div>
+  <div class="login-box">
+    <div class="login-brand">
+      <div class="login-logo">⛪</div>
+      <h1 class="login-title">Pibane Mídia</h1>
+      <p class="login-sub">Sistema de escalas de voluntários</p>
+    </div>
+    <div class="login-loading" id="login-loading">
+      <div class="spin" style="width:24px;height:24px;margin:0 auto 8px"></div>
+      Carregando voluntários da planilha...
+    </div>
+    <div id="login-vols" style="display:none">
+      <div class="login-section">Entrar como</div>
+      <div id="vol-buttons"></div>
+      <p style="text-align:center;font-size:11px;color:var(--text3);margin-top:14px">Em breve: login pelo link do WhatsApp</p>
+    </div>
+    <div id="login-sem-url" style="display:none">
+      <div class="alert-warn" style="margin-bottom:16px">
+        <strong>⚙️ Configure a URL do Apps Script</strong>
+        Clique no botão abaixo e cole a URL após publicar o script.
+      </div>
+      <button class="btn-primary" style="margin-top:0" onclick="abrirConfig()">⚙️ Configurar URL</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ APP ══ -->
+<div id="tela-app">
+  <div class="app-header">
+    <div class="header-top">
+      <div class="brand">Pibane <span>Mídia</span></div>
+      <div class="hbtns">
+        <button class="ibtn" id="btn-cfg" style="display:none" onclick="abrirConfig()">⚙️</button>
+        <button class="ibtn" onclick="sair()">← Sair</button>
+      </div>
+    </div>
+    <div class="user-bar">
+      <div class="av av-md" id="h-av"></div>
+      <div class="user-info">
+        <div class="uname" id="h-nome"></div>
+        <div class="ufn" id="h-fn"></div>
+      </div>
+      <div id="h-badge"></div>
+    </div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+  <div id="panes"></div>
+</div>
+
+<!-- ══ MODAL TROCA ══ -->
+<div class="modal-bg" id="modal-troca">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Pedir troca 🔄</div>
+    <div class="modal-sub" id="m-sub"></div>
+    <div id="m-subs"></div>
+    <button class="btn-primary" onclick="enviarTroca()">Enviar pedido de troca</button>
+    <button class="btn-secondary" onclick="closeModal('modal-troca')">Cancelar</button>
+  </div>
+</div>
+
+<!-- ══ MODAL WA ══ -->
+<div class="modal-bg" id="modal-wa">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">📲 Mensagens WhatsApp</div>
+    <div class="modal-sub">Copie cada mensagem e envie no WhatsApp do voluntário.</div>
+    <div id="wa-lista"></div>
+    <button class="btn-secondary" onclick="closeModal('modal-wa')">Fechar</button>
+  </div>
+</div>
+
+<!-- ══ MODAL CONFIG ══ -->
+<div class="modal-bg" id="modal-config">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">⚙️ Configuração</div>
+    <div class="modal-sub">Cole a URL do Apps Script para conectar com a planilha.</div>
+    <div class="cfg-label">URL do Apps Script</div>
+    <input class="cfg-input" id="inp-url" type="url" placeholder="https://script.google.com/macros/s/...">
+    <div style="margin-top:12px">
+      <div class="cfg-label">Seu e-mail (admin)</div>
+      <input class="cfg-input" id="inp-email" type="email" placeholder="pretinho@gmail.com">
+    </div>
+    <button class="btn-primary" onclick="salvarConfig()">✅ Salvar configuração</button>
+    <button class="btn-secondary" onclick="closeModal('modal-config')">Fechar</button>
+    <div class="sep"></div>
+    <div style="font-size:12px;color:var(--text3);line-height:1.8">
+      <strong style="color:var(--text2)">Como gerar a URL:</strong><br>
+      1. Abra o Apps Script da planilha<br>
+      2. Cole o código do arquivo <code>.gs</code><br>
+      3. Clique em <code>Implantar → Nova implantação</code><br>
+      4. Tipo: <code>App da Web</code><br>
+      5. Executar como: <code>Eu mesmo</code><br>
+      6. Acesso: <code>Qualquer pessoa</code><br>
+      7. Copie a URL gerada e cole aqui
+    </div>
+  </div>
+</div>
+
+<div class="loader-bg" id="loader"><div class="spin" style="width:36px;height:36px"></div><div class="loader-txt" id="loader-txt">Carregando...</div></div>
+<div id="toast"></div>
+
+<script>
+// ════════════════════════════════════
+//  CONFIG
+// ════════════════════════════════════
+let SCRIPT_URL  = localStorage.getItem('pibane_url')   || '';
+let ADMIN_EMAIL = localStorage.getItem('pibane_email') || '';
+
+// ════════════════════════════════════
+//  ESTADO
+// ════════════════════════════════════
+let U       = null;   // usuário logado
+let VOLS    = [];     // voluntários da planilha
+let EVENTOS = [];     // eventos da planilha
+let ESCALAS = [];     // escalas da planilha
+let DISPON  = [];     // disponibilidades salvas
+let disp    = {};     // respostas do form
+let trocaId = null;
+let trocaFn = null;
+
+// ════════════════════════════════════
+//  INICIALIZAÇÃO — carrega planilha
+// ════════════════════════════════════
+window.addEventListener('load', inicializar);
+
+async function inicializar() {
+  if (!SCRIPT_URL) {
+    document.getElementById('login-sem-url').style.display = 'block';
+    return;
+  }
+  document.getElementById('login-loading').style.display = 'block';
+  try {
+    // Carrega voluntários e eventos em paralelo
+    const [rV, rE] = await Promise.all([
+      api('listar_voluntarios'),
+      api('listar_eventos')
+    ]);
+    VOLS    = rV.dados   || [];
+    EVENTOS = rE.dados   || [];
+    renderLogin();
+  } catch (err) {
+    document.getElementById('login-loading').style.display = 'none';
+    document.getElementById('login-sem-url').style.display = 'block';
+    toast('Erro ao conectar com a planilha.', 'err');
+  }
+}
+
+function renderLogin() {
+  document.getElementById('login-loading').style.display = 'none';
+  document.getElementById('login-vols').style.display    = 'block';
+
+  const container = document.getElementById('vol-buttons');
+  let html = '';
+
+  // Botão admin primeiro
+  html += `<div style="margin-bottom:8px">
+    <button class="vbtn admin" onclick="entrar('admin','Pretinho Moura','PM','Líder / Admin','—')">
+      <div class="av adm av-sm">PM</div>
+      <div style="text-align:left">
+        <div style="font-size:13px;font-weight:600">Pretinho Moura</div>
+        <div style="font-size:10px;color:var(--blue)">Líder / Admin</div>
+      </div>
+    </button>
+  </div>`;
+
+  // Voluntários da planilha
+  html += '<div class="vol-grid">';
+  VOLS.forEach(v => {
+    const ini  = iniciais(v.nome || '');
+    const nome = v.nome || '';
+    const fn   = v.funcoes || v.funcao || '';
+    const nivel= v.nivel || '';
+    html += `<button class="vbtn" onclick="entrar('vol','${esc(nome)}','${ini}','${esc(fn)}','${esc(nivel)}')">
+      <div class="av av-sm">${ini}</div>
+      <div class="vol-login-name">${nome}</div>
+      <div class="vol-login-fn">${fn}</div>
+    </button>`;
+  });
+  html += '</div>';
+
+  container.innerHTML = html;
+}
+
+// ════════════════════════════════════
+//  LOGIN / SAIR
+// ════════════════════════════════════
+function entrar(tipo, nome, ini, fn, nivel) {
+  U = { tipo, nome, ini, fn, nivel };
+  document.getElementById('tela-login').style.display = 'none';
+  document.getElementById('tela-app').style.display   = 'block';
+  renderApp();
+  if (tipo === 'admin') carregarDadosAdmin();
+}
+
+function sair() {
+  document.getElementById('tela-login').style.display = 'flex';
+  document.getElementById('tela-app').style.display   = 'none';
+  disp = {}; U = null;
+}
+
+// ════════════════════════════════════
+//  RENDER APP
+// ════════════════════════════════════
+function renderApp() {
+  document.getElementById('h-av').textContent = U.ini;
+  document.getElementById('h-av').style.background = U.tipo === 'admin'
+    ? 'linear-gradient(135deg,#7c3aed,#2563eb)'
+    : 'linear-gradient(135deg,#1d4ed8,#0d9488)';
+  document.getElementById('h-nome').textContent  = U.nome;
+  document.getElementById('h-fn').textContent    = U.fn + (U.nivel && U.nivel !== '—' ? ' · ' + U.nivel : '');
+  document.getElementById('h-badge').innerHTML   = U.tipo === 'admin'
+    ? '<span class="pill pb">👑 Líder</span>'
+    : '<span class="pill pg">● Ativo</span>';
+  document.getElementById('btn-cfg').style.display = U.tipo === 'admin' ? 'flex' : 'none';
+
+  if (U.tipo === 'admin') buildAdminUI();
+  else buildVolUI();
+}
+
+// ════════════════════════════════════
+//  VOLUNTÁRIO UI
+// ════════════════════════════════════
+function buildVolUI() {
+  document.getElementById('tabs').innerHTML = `
+    <button class="tab active" onclick="trocarTab('dispon',this)">📅 Disponibilidade</button>
+    <button class="tab" onclick="trocarTab('escalas',this)">✅ Escalas</button>
+    <button class="tab" onclick="trocarTab('hist',this)">📊 Histórico</button>
+  `;
+
+  document.getElementById('panes').innerHTML = `
+    <div id="pane-dispon" class="pane active">
+      <div class="card card-blue">
+        <div class="sec-label">Disponibilidade — Junho 2025</div>
+        <p class="muted" style="margin-bottom:14px">Marque em quais datas você consegue servir.</p>
+        <div id="dates-grid"></div>
+        <button class="btn-primary" onclick="salvarDisponibilidade()">💾 Salvar disponibilidade</button>
+      </div>
+    </div>
+    <div id="pane-escalas" class="pane">
+      <div class="card card-blue">
+        <div class="sec-label">Suas escalas</div>
+        <div id="escalas-vol"></div>
+      </div>
+    </div>
+    <div id="pane-hist" class="pane">
+      <div class="card">
+        <div class="sec-title">Histórico</div>
+        <p class="muted">Seu histórico de presenças aparece aqui conforme você confirmar escalas.</p>
+      </div>
+    </div>
+  `;
+
+  renderDatasDispon();
+  carregarEscalasVol();
+}
+
+function renderDatasDispon() {
+  // Datas vêm dos eventos da planilha
+  const grid = document.getElementById('dates-grid');
+  if (!EVENTOS.length) {
+    grid.innerHTML = '<p class="muted">Nenhum evento encontrado na planilha ainda.</p>';
+    return;
+  }
+  grid.innerHTML = EVENTOS.map(ev => {
+    const id  = 'ev_' + (ev.id || ev.data || Math.random().toString(36).slice(2));
+    const txt = ev.data || ev.nome || '';
+    const sub = (ev.hora || '') + (ev.tipo ? ' · ' + ev.tipo : '');
+    return `<div class="ditem" id="di-${id}">
+      <div><div class="dlabel">${txt}</div><div class="dsub">${sub}</div></div>
+      <div class="dbtns">
+        <button class="dbtn ds" id="ds-${id}" onclick="marcarDisp('${id}','sim','${esc(txt)}','${esc(sub)}')">✓ Sim</button>
+        <button class="dbtn dn" id="dn-${id}" onclick="marcarDisp('${id}','nao','${esc(txt)}','${esc(sub)}')">✗ Não</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function marcarDisp(id, resp, txt, sub) {
+  disp[id] = { resp, txt, sub };
+  document.getElementById('di-' + id).className = 'ditem ' + (resp === 'sim' ? 'dsim' : 'dnao');
+  document.getElementById('ds-' + id).className = 'dbtn ds' + (resp === 'sim' ? ' on' : '');
+  document.getElementById('dn-' + id).className = 'dbtn dn' + (resp === 'nao' ? ' on' : '');
+}
+
+async function salvarDisponibilidade() {
+  if (!Object.keys(disp).length) { toast('Marque pelo menos uma data!', 'err'); return; }
+  const payload = {
+    acao: 'disponibilidade',
+    voluntarioNome: U.nome,
+    funcao: U.fn,
+    timestamp: agora(),
+    respostas: Object.entries(disp).map(([id, v]) => ({
+      dataId: id, data: v.txt, culto: v.sub, resposta: v.resp
+    }))
+  };
+  await enviar(payload, '✅ Disponibilidade salva na planilha!');
+}
+
+async function carregarEscalasVol() {
+  const el = document.getElementById('escalas-vol');
+  if (!el) return;
+  try {
+    const r = await api('listar_escalas', { volNome: U.nome });
+    ESCALAS = r.dados || [];
+    if (!ESCALAS.length) {
+      el.innerHTML = '<p class="muted">Nenhuma escala encontrada para você.</p>';
+      return;
+    }
+    el.innerHTML = ESCALAS.map(e => {
+      const cols  = Object.keys(e);
+      const fn    = e.funcao || e.funcoes || e[cols.find(c => /func/i.test(c))] || '';
+      const dt    = e.data   || e[cols.find(c => /data/i.test(c))] || '';
+      const tipo  = e.tipo   || e[cols.find(c => /tipo|evento|nome/i.test(c))] || '';
+      const status= e.status || 'pendente';
+      const id    = e.id     || Math.random().toString(36).slice(2);
+      return `<div class="escala-card" id="ec-${id}">
+        <div class="escala-head">
+          <div>
+            <div class="escala-dt">${dt} — ${tipo}</div>
+            <div class="escala-fn">Função: ${fn}</div>
+          </div>
+          <span class="pill ${status==='confirmado'?'pg':status==='troca_pedida'?'pa':'pa'}" id="ep-${id}">
+            ${status==='confirmado'?'✓ Confirmado':status==='troca_pedida'?'⇄ Troca':'Pendente'}
+          </span>
+        </div>
+        ${status !== 'confirmado' ? `<div class="escala-body">
+          <button class="btn-cf" id="bc-${id}" onclick="confirmar('${id}','${esc(fn)}',this)">✅ Confirmar</button>
+          <button class="btn-tr" onclick="abrirTroca('${id}','${esc(fn)}')">🔄 Troca</button>
+        </div>` : ''}
+      </div>`;
+    }).join('');
+  } catch {
+    el.innerHTML = '<p class="muted">Erro ao carregar escalas.</p>';
+  }
+}
+
+// ════════════════════════════════════
+//  ADMIN UI
+// ════════════════════════════════════
+function buildAdminUI() {
+  document.getElementById('tabs').innerHTML = `
+    <button class="tab active" onclick="trocarTab('painel',this)">📊 Painel</button>
+    <button class="tab" onclick="trocarTab('escala',this)">📅 Escala</button>
+    <button class="tab" onclick="trocarTab('vols',this)">👥 Voluntários</button>
+    <button class="tab" onclick="trocarTab('wa',this)">📲 WhatsApp</button>
+  `;
+
+  document.getElementById('panes').innerHTML = `
+    <div id="pane-painel" class="pane active">
+      <div class="metrics" id="adm-metrics">
+        <div class="metric"><div class="met-n" style="color:var(--blue)">—</div><div class="met-l">Voluntários</div></div>
+        <div class="metric"><div class="met-n" style="color:var(--green)">—</div><div class="met-l">Confirmados</div></div>
+        <div class="metric"><div class="met-n" style="color:var(--amber)">—</div><div class="met-l">Trocas</div></div>
+      </div>
+      <div class="card card-green">
+        <div class="sec-label">Disponibilidade recebida</div>
+        <div id="adm-dispon"><p class="muted">Carregando...</p></div>
+      </div>
+    </div>
+    <div id="pane-escala" class="pane">
+      <div class="card">
+        <div class="sec-label">Próximo evento</div>
+        <div id="adm-prox-evento"><p class="muted">Carregando...</p></div>
+      </div>
+      <div class="card card-amber">
+        <div class="sec-label">Slots da escala</div>
+        <div id="adm-slots"><p class="muted">Carregando...</p></div>
+      </div>
+    </div>
+    <div id="pane-vols" class="pane">
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div class="sec-title" style="margin:0">Equipe de mídia</div>
+          <span class="pill pb" id="vols-count">—</span>
+        </div>
+        <div id="adm-vols-list"><p class="muted">Carregando...</p></div>
+      </div>
+    </div>
+    <div id="pane-wa" class="pane">
+      <div class="card card-blue">
+        <div class="sec-label">Enviar escala pelo WhatsApp</div>
+        <p class="muted" style="margin-bottom:14px">Clique para gerar as mensagens de todos os voluntários escalados. Depois é só copiar e enviar.</p>
+        <button class="btn-primary" style="margin-top:0" onclick="gerarMensagensWA()">📲 Gerar mensagens</button>
+      </div>
+      <div id="wa-preview" style="display:none">
+        <div class="card">
+          <div class="sec-label">Mensagens prontas</div>
+          <div id="wa-msgs"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+async function carregarDadosAdmin() {
+  try {
+    const [rV, rE, rD] = await Promise.all([
+      api('listar_voluntarios'),
+      api('listar_escalas'),
+      api('listar_disponibilidade')
+    ]);
+    VOLS    = rV.dados || [];
+    ESCALAS = rE.dados || [];
+    DISPON  = rD.dados || [];
+
+    renderAdminMetrics();
+    renderAdminDispon();
+    renderAdminVols();
+    renderAdminEscala();
+  } catch(err) {
+    toast('Erro ao carregar dados.', 'err');
+  }
+}
+
+function renderAdminMetrics() {
+  const confs  = ESCALAS.filter(e => (e.status||'').includes('confirm')).length;
+  const trocas = ESCALAS.filter(e => (e.status||'').includes('troca')).length;
+  const el = document.getElementById('adm-metrics');
+  el.innerHTML = `
+    <div class="metric"><div class="met-n" style="color:var(--blue)">${VOLS.length}</div><div class="met-l">Voluntários</div></div>
+    <div class="metric"><div class="met-n" style="color:var(--green)">${confs}</div><div class="met-l">Confirmados</div></div>
+    <div class="metric"><div class="met-n" style="color:var(--amber)">${trocas}</div><div class="met-l">Trocas</div></div>
+  `;
+}
+
+function renderAdminDispon() {
+  const el = document.getElementById('adm-dispon');
+  if (!DISPON.length) {
+    el.innerHTML = '<p class="muted">Aguardando respostas dos voluntários...</p>';
+    return;
+  }
+  // Agrupa por data
+  const por = {};
+  DISPON.forEach(r => {
+    const dt = r.data || r[Object.keys(r).find(k => /^data$/i.test(k))] || '?';
+    if (!por[dt]) por[dt] = { sim: [], nao: [] };
+    const resp = String(r.disponivel || r[Object.keys(r).find(k => /disp/i.test(k))] || '');
+    const nome = r.voluntario || r[Object.keys(r).find(k => /vol|nome/i.test(k))] || '?';
+    if (resp.includes('Sim')) por[dt].sim.push(nome);
+    else por[dt].nao.push(nome);
+  });
+
+  el.innerHTML = `<table class="disp-table">
+    <tr><th>Data</th><th>Podem ✅</th><th>Não podem ❌</th><th>Total</th></tr>
+    ${Object.entries(por).map(([dt, p]) => `
+      <tr>
+        <td>${dt}</td>
+        <td class="disp-sim">${p.sim.join(', ') || '—'}</td>
+        <td class="disp-nao">${p.nao.join(', ') || '—'}</td>
+        <td><span class="pill ${p.sim.length>=4?'pg':p.sim.length>=2?'pa':'pr'}">${p.sim.length}</span></td>
+      </tr>
+    `).join('')}
+  </table>`;
+}
+
+function renderAdminVols() {
+  const el = document.getElementById('adm-vols-list');
+  document.getElementById('vols-count').textContent = VOLS.length + ' ativos';
+  if (!VOLS.length) { el.innerHTML = '<p class="muted">Nenhum voluntário na planilha.</p>'; return; }
+  el.innerHTML = VOLS.map(v => {
+    const nome = v.nome || '';
+    const fn   = v.funcoes || v.funcao || '';
+    const nivel= v.nivel || '';
+    const ini  = iniciais(nome);
+    return `<div class="vrow">
+      <div class="av av-sm">${ini}</div>
+      <div class="vinfo"><div class="vname">${nome}</div><div class="vfn">${fn}${nivel?' · '+nivel:''}</div></div>
+      <span class="pill pg" style="font-size:10px">Ativo</span>
+    </div>`;
+  }).join('');
+}
+
+function renderAdminEscala() {
+  const evEl = document.getElementById('adm-prox-evento');
+  if (EVENTOS.length) {
+    const ev = EVENTOS[0];
+    evEl.innerHTML = `<div style="font-size:15px;font-weight:600">${ev.data||''} ${ev.hora?'às '+ev.hora:''}</div>
+      <div class="muted">${ev.tipo||ev.nome||''}</div>`;
+  } else {
+    evEl.innerHTML = '<p class="muted">Nenhum evento cadastrado ainda.</p>';
+  }
+
+  const slEl = document.getElementById('adm-slots');
+  if (!ESCALAS.length) { slEl.innerHTML = '<p class="muted">Nenhuma escala cadastrada.</p>'; return; }
+  slEl.innerHTML = ESCALAS.slice(0,8).map(e => {
+    const nome   = e.voluntario || e.nome || e[Object.keys(e).find(k=>/vol|nome/i.test(k))] || '?';
+    const fn     = e.funcao || e.funcoes || '?';
+    const status = e.status || 'pendente';
+    const ini    = iniciais(nome);
+    const cls    = status.includes('confirm') ? 'sl-cf' : status.includes('troca') ? 'sl-pd' : 'sl-pd';
+    const pill   = status.includes('confirm')
+      ? '<span class="pill pg">✓ Confirmado</span>'
+      : status.includes('troca')
+      ? '<span class="pill pa">⇄ Troca</span>'
+      : '<span class="pill pa">Pendente</span>';
+    return `<div class="slot-row ${cls}">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="av av-sm">${ini}</div>
+        <div><div style="font-size:13px;font-weight:500">${nome}</div><div style="font-size:11px;color:var(--text3)">${fn}</div></div>
+      </div>${pill}
+    </div>`;
+  }).join('');
+}
+
+// ════════════════════════════════════
+//  AÇÕES
+// ════════════════════════════════════
+async function confirmar(escId, fn, btn) {
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spin" style="width:14px;height:14px;border-width:2px"></div>';
+  const r = await enviar({
+    acao: 'confirmar', voluntarioNome: U.nome,
+    escalaId: escId, funcao: fn, timestamp: agora()
+  }, '🎉 Presença confirmada!');
+  if (r && r.status === 'ok') {
+    btn.innerHTML = '✅ Confirmado!';
+    btn.style.background = 'var(--green-d)';
+    btn.style.color = 'var(--green)';
+    btn.style.border = '1px solid rgba(34,211,122,.3)';
+    const pill = document.getElementById('ep-' + escId);
+    if (pill) { pill.className = 'pill pg'; pill.textContent = '✓ Confirmado'; }
+  } else {
+    btn.disabled = false; btn.innerHTML = '✅ Confirmar';
+  }
+}
+
+function abrirTroca(escId, fn) {
+  trocaId = escId; trocaFn = fn;
+  document.getElementById('m-sub').textContent = `Substituto para: ${fn}`;
+  // Sugere voluntários com mesma função ou área
+  const subs = VOLS.filter(v => {
+    const nome = v.nome || '';
+    if (nome === U.nome) return false;
+    const vfn = (v.funcoes || v.funcao || '').toLowerCase();
+    return vfn.includes('câmera') || vfn.includes(fn.toLowerCase().split(' ')[0]);
+  }).slice(0, 4);
+
+  document.getElementById('m-subs').innerHTML = subs.length
+    ? subs.map(s => {
+        const ini = iniciais(s.nome||'');
+        const vfn = s.funcoes || s.funcao || '';
+        const sc  = (s.funcoes||'').toLowerCase().includes(fn.toLowerCase().split(' ')[0]) ? 85 : 60;
+        return `<div class="sub-item" onclick="selSub(this)" data-nome="${esc(s.nome||'')}">
+          <div class="av av-sm">${ini}</div>
+          <div><div class="sub-nome">${s.nome}</div><div class="sub-mot">${vfn}</div></div>
+          <div class="sub-sc">${sc}pts</div>
+        </div>`;
+      }).join('')
+    : '<p class="muted">Nenhum substituto encontrado automaticamente. O líder será notificado.</p>';
+
+  openModal('modal-troca');
+}
+
+function selSub(el) {
+  document.querySelectorAll('.sub-item').forEach(i => i.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+async function enviarTroca() {
+  const sel = document.querySelector('.sub-item.sel');
+  closeModal('modal-troca');
+  await enviar({
+    acao: 'troca', voluntarioNome: U.nome, escalaId: trocaId,
+    funcao: trocaFn, substitutoNome: sel ? sel.dataset.nome : 'A definir',
+    timestamp: agora()
+  }, '🔄 Pedido de troca enviado! E-mails disparados.');
+}
+
+async function gerarMensagensWA() {
+  setLoader(true, 'Gerando mensagens...');
+  try {
+    const r = await apiPost({ acao: 'enviar_whatsapp' });
+    setLoader(false);
+    if (!r.mensagens || !r.mensagens.length) {
+      toast('Nenhuma mensagem gerada.', 'err'); return;
+    }
+    const el = document.getElementById('wa-msgs');
+    el.innerHTML = r.mensagens.map(m => `
+      <div class="wa-msg">
+        <div class="wa-nome">${m.nome}</div>
+        <div class="wa-tel">📱 ${m.tel || 'sem telefone'}</div>
+        <div class="wa-text">${m.mensagem}</div>
+        <button class="wa-copy" onclick="copiarMsg(this,'${esc(m.mensagem)}')">Copiar</button>
+      </div>
+    `).join('');
+    document.getElementById('wa-preview').style.display = 'block';
+    toast('✅ ' + r.mensagens.length + ' mensagens geradas!', 'ok');
+  } catch {
+    setLoader(false);
+    toast('Erro ao gerar mensagens.', 'err');
+  }
+}
+
+function copiarMsg(btn, msg) {
+  navigator.clipboard.writeText(msg.replace(/\\n/g, '\n'));
+  btn.textContent = '✓ Copiado!';
+  setTimeout(() => btn.textContent = 'Copiar', 2000);
+}
+
+// ════════════════════════════════════
+//  API
+// ════════════════════════════════════
+async function api(acao, params = {}) {
+  if (!SCRIPT_URL) throw new Error('URL não configurada');
+  const url = SCRIPT_URL + '?acao=' + acao + '&' + new URLSearchParams(params).toString();
+  const res = await fetch(url);
+  return res.json();
+}
+
+async function apiPost(payload) {
+  if (!SCRIPT_URL) throw new Error('URL não configurada');
+  const res = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
+  return res.json();
+}
+
+async function enviar(payload, msgOk) {
+  setLoader(true, 'Salvando na planilha...');
+  try {
+    const r = await apiPost(payload);
+    setLoader(false);
+    if (r.status === 'ok') toast(msgOk, 'ok');
+    else toast('Erro: ' + (r.msg||''), 'err');
+    return r;
+  } catch {
+    setLoader(false);
+    toast('Erro de conexão.', 'err');
+    return null;
+  }
+}
+
+// ════════════════════════════════════
+//  CONFIG
+// ════════════════════════════════════
+function abrirConfig() {
+  document.getElementById('inp-url').value   = SCRIPT_URL;
+  document.getElementById('inp-email').value = ADMIN_EMAIL;
+  openModal('modal-config');
+}
+
+function salvarConfig() {
+  const url   = document.getElementById('inp-url').value.trim();
+  const email = document.getElementById('inp-email').value.trim();
+  if (!url.startsWith('https://')) { toast('URL inválida!', 'err'); return; }
+  SCRIPT_URL  = url;   localStorage.setItem('pibane_url', url);
+  ADMIN_EMAIL = email; localStorage.setItem('pibane_email', email);
+  closeModal('modal-config');
+  toast('✅ Configuração salva!', 'ok');
+  // Recarrega voluntários
+  document.getElementById('login-sem-url').style.display = 'none';
+  inicializar();
+}
+
+// ════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════
+function trocarTab(id, btn) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('pane-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+function openModal(id)  { document.getElementById(id).classList.add('open');    }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function setLoader(on, txt = '') {
+  document.getElementById('loader').classList.toggle('open', on);
+  if (txt) document.getElementById('loader-txt').textContent = txt;
+}
+function toast(msg, tipo = 'inf') {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'show ' + tipo;
+  setTimeout(() => el.className = '', 3200);
+}
+function iniciais(nome) {
+  return nome.split(' ').slice(0,2).map(n => n[0]||'').join('').toUpperCase() || '?';
+}
+function agora() { return new Date().toLocaleString('pt-BR'); }
+function esc(s)  { return String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+
+document.querySelectorAll('.modal-bg').forEach(m =>
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); })
+);
+</script>
+</body>
+</html>
